@@ -1,2 +1,2 @@
 # Unogame
-nonfunctinal untill now 
+not yet
