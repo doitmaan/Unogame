@@ -14,14 +14,14 @@ public:
 	unsigned int getLength() const; // returns the number of Ts currently in the list
 
 	void insert(unsigned int pos, T item); // inserts T into the list at location pos; 
-										   // PRECONDITION: pos is between 1 and getLength()+1
+											  // PRECONDITION: pos is between 1 and getLength()+1
 	T remove(unsigned int pos); // removes the element at location pos from the list, and returns it;
-								// PRECONDITION: the list is not empty, and pos is between 1 and getLength();
+								   // PRECONDITION: the list is not empty, and pos is between 1 and getLength();
 	T retrieve(unsigned int pos) const; // find the element stored at location pos in the list and return it; 
-										// PRECONDITION: the list is not empty, and pos is between 1 and getLength();
+										   // PRECONDITION: the list is not empty, and pos is between 1 and getLength();
 	T replace(unsigned int pos, T item); // replace the element at location pos in the list with T,
-										 // and return the element that was displaced; 
-										 // PRECONDITION: the list is not empty, and pos is between 1 and getLength();
+											   // and return the element that was displaced; 
+											   // PRECONDITION: the list is not empty, and pos is between 1 and getLength();
 	void append(T item) { return insert(getLength() + 1, item); } // adds an T at the back of the list
 	T back() const { return retrieve(getLength()); } // retrieves an T from the back of the list
 	T popBack() { return remove(getLength()); } // removes an T from the back of the list
@@ -29,8 +29,8 @@ public:
 
 	template <class Equality> // "find" uses linear search to return position of the first T identical to "key",
 	int find(T key) const; // returns -1 if no identical T is found. Extra template argument <class Equality> 
-						   // must be a functor like "IsEqual" or "IsEqualDeref" defined in StandardFunctors.h. 
-						   // EXAMPLE: call lst.find<IsEqual>(4) returns location of integer 4 inside List<int> lst;  
+							  // must be a functor like "IsEqual" or "IsEqualDeref" defined in StandardFunctors.h. 
+							  // EXAMPLE: call lst.find<IsEqual>(4) returns location of integer 4 inside List<int> lst;  
 	template <class Order> // these two functions sort (via either "selection" or "insertion" sorting algorithms)
 	void selectionSort();  // content of the list based on specified "Order". Additional template argument <class Order> 
 						   // should be a comparison functor like "IsLess" or "IsGreaterDeref" from StandardFunctors.h             
@@ -52,7 +52,7 @@ public:
 		T* _ptr;
 
 	public:
-		Iterator(T* ptr) :_ptr(ptr) {}
+		Iterator(T* ptr):_ptr(ptr){}
 		Iterator operator++() { Iterator i = *this; _ptr++; return i; } // for forward traversing, e,g, Iterator i=begin(); ... ++i;
 		bool operator != (const Iterator& b) { return _ptr != b._ptr; }
 		T operator *() { return *_ptr; }
@@ -94,7 +94,7 @@ unsigned int List<T> ::getLength() const {
 template <class T>
 void List<T> ::insert(unsigned int pos, T item) {
 	// PRECONDITION: pos is between 1 and m_size+1
-	assert((pos >= 1) && (pos <= m_size + 1) && "List index is out of bounds (in insert)");
+	assert((pos >= 1) && (pos <= m_size + 1)&& "List index is out of bounds (in insert)");
 	if (m_size == m_max_capacity) replaceContainer();
 	for (unsigned int k = m_size; k >= pos; k--)
 		m_container[translate(k + 1)] = m_container[translate(k)];
@@ -105,7 +105,7 @@ void List<T> ::insert(unsigned int pos, T item) {
 template <class T>
 T List<T> ::remove(unsigned int pos) {
 	// PRECONDITION: the list is not empty, and pos is between 1 and m_size
-	assert((pos >= 1) && (pos <= m_size) && "List index is out of bounds (in remove)");
+	assert((pos >= 1) && (pos <= m_size)&& "List index is out of bounds (in remove)");
 	T returnValue = m_container[translate(pos)];
 	for (unsigned int k = pos + 1; k <= m_size; k++)
 		m_container[translate(k - 1)] = m_container[translate(k)];
@@ -116,14 +116,14 @@ T List<T> ::remove(unsigned int pos) {
 template <class T>
 T List<T> ::retrieve(unsigned int pos) const {
 	// PRECONDITION: the list is not empty, and pos is between 1 and m_size
-	assert((pos >= 1) && (pos <= m_size) && "List index is out of bounds (in retrieve)");
+	assert((pos >= 1) && (pos <= m_size)&& "List index is out of bounds (in retrieve)");
 	return m_container[translate(pos)];
 }
 
 template <class T>
 T List<T> ::replace(unsigned int pos, T item) {
 	// PRECONDITION: the list is not empty, and pos is between 1 and m_size
-	assert((pos >= 1) && (pos <= m_size) && "List index is out of bounds (in replace)");
+	assert((pos >= 1) && (pos <= m_size)&& "List index is out of bounds (in replace)");
 	T returnVal = m_container[translate(pos)];
 	m_container[translate(pos)] = item;
 	return returnVal;
