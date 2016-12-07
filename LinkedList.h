@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <assert.h>
 template <class T>
 class LinkedList   //singly-linked 
