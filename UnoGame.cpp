@@ -12,9 +12,10 @@ d) Draw cards for each player and place them into their hands.
 e) Draw a starting card for the face up pile.
 - It will have a play() method that will play the game(see game simulation above)*/
 #include<iostream>
-//#include<unoplayer>
-//#include<unocard>
-//include<bag.h>
+#iclude<memory>
+#include<unoplayer>
+#include<unocard>
+#include<bag.h>
 #define NUM_Of_player 3
 
 class UnoGame
@@ -22,10 +23,14 @@ class UnoGame
 public:
 	UnoGame();
 	~UnoGame();
+	void addtohand();
+	unoplayer players[3];
+
 
 private:
-	stack<card> u_deck;
-	qeue<card> d_deck;
+	stack<UnoCard> u_deck;
+	qeue<UnoCard> d_deck;
+	bag m_bag;
 
 
 
@@ -34,28 +39,65 @@ private:
 UnoGame::UnoGame()
 {
 	cout << "welcome to the game //constructor" << endl;
+	
+
+	Bag<shared_ptr<Card>> bag(40);
+COLOR COLOR[] = { RED,BLUE,GREEN,YELLOW};
+		RANK RANK[] = { 1,2,3,4,5 };,
+		for (int i = 0; i < 4; i+,+) {
+			for (int j = 0; j < 5; j++) {
+				bag.add(make_shared<Card>(s[i], d[j]));
+			}
+		} 
+		for(int i=1;i<=40;i++){
+		d_deck.enqueue(bag.getOne());}
+
+for(int i=0;i<=2;i++){
+
+
+                 for(int j=1;j<=7;j++){
+
+	player[i]->m_hand.insert(d_deck.dequeue());
+}
+                                            }
+u_deck.peek(bag.getone());
 
 }
 
 UnoGame::~UnoGame()
 {
-} 
-	void getAHand(unsigned int n, List<shared_ptr<Card>> &hand) {
-		// make a bag add all the cards to it
-		Bag<shared_ptr<Card>> bag(40);
-COLOR COLOR[] = { RED,BLUE,GREEN,YELLOW};
-		RANK RANK[] = { 1,2,3,4,5 };,
-		for (int i = 0; i < 4; i+,+) {
-			for (int j = 0; j < 13; j++) {
-				bag.add(make_shared<Card>(s[i], d[j]));
-			}
-		}
-		//put some cards in hand
-		for (int i = 0; i < n; i++) {
-			hand.append(bag.getOne());
-		}
-	}
+}
+void play(){
+	bool flag = false;
+	while(!flag)
+		if(!d_deck.isEmpty()){
+			for(int x=0;x<=2;x++){
+				UnoCard card1  = player[x].cardmatch(u_deck.peek();
+				if(card != null)
+				{
+					u_deck.push(card1);
+					if(m_hand.isEmpty()==0){
+						flag=true;
+					}
+				}
+				else{
+					player[x].insert(d_deck.dequeue());
+				}//pulling a card from the deck
 
+        else {
+        	for(int s=0;s<=u_deck.size();s++)
+                
+                 {d_deck.enque(u_deck.pop());}   }//coverte the stack to the qeue 
+}
 
 
 }
+
+
+
+};
+//heck the deck size if===0 converte from the stack to queue 
+
+//check the o=player turn match if equall to the upper card 
+//if yes so remove from the hand 
+
