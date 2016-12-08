@@ -1,22 +1,25 @@
+#pragma once
 #include <iostream>
+using namespace std;
 
 // User defined color and rank types (user-defined integers) 
-enum color{ RED = 1, BLUE = 2, GREEN = 3, YELLOW = 4 };
-enum rank { N1=1,N2 = 2, N3 = 3, N4 = 4, N5 = 5};
+enum color { RED = 1, BLUE = 2, GREEN = 3, YELLOW = 4, black = 5 };
+enum rank2 { N1 = 1, N2 = 2, N3 = 3, N4 = 4, N5 = 5 };
 
 class Card
 {
 public:
-	Card(color COLOR= RED, rank rank = N1); // constructor with some default values
+	Card(color COLOR, rank2 rank); // constructor with some default values
+
 	~Card(); // destructor
 	inline color getcolor(void) const { return m_color; }
-	inline rank getrank(void) const { return m_rank; }
-	char toCharcolor(void ); // returns a char that "describes" card's color
+	inline rank2 getrank(void) const { return m_rank; }
+	char toCharcolor(void); // returns a char that "describes" card's color
 	char toCharrank(void); // returns a char that "describes" card's rank
 
 private:
 	color m_color; // private storage of color
-	rank m_rank; // private storage of rank
+	rank2 m_rank; // private storage of rank
 	friend std::ostream& operator<<(std::ostream& os, const Card &c);
 };
 
@@ -33,15 +36,13 @@ inline bool operator>(const Card& a, const Card& b) {
 
 // checks equality of colors and ranks for two cards
 inline bool operator==(Card& a, Card& b) { return (a.getrank() == b.getrank() && a.getcolor() == b.getcolor()); }
-Card::Card(color color, rank rank)
-	: m_color(color)
-	, m_rank(rank)
-{
-}
+
+Card::Card(color color = RED, rank2 rank) : m_color(color), m_rank(rank) {}
 
 // destructor
 Card::~Card()
 {
+
 }
 
 char Card::toCharcolor()
@@ -63,8 +64,9 @@ char Card::toCharrank()
 }
 std::ostream& operator<<(std::ostream& os, const Card &c) {
 	int color = c.getcolor();
-	int demo = c.getrank();
-	switch (rank) {
+	int rank2 = c.getrank();
+	switch (rank2)
+	{
 	case 1:
 		os << "1";
 		break;
@@ -77,8 +79,8 @@ std::ostream& operator<<(std::ostream& os, const Card &c) {
 	case 4:
 		os << "4";
 		break;
-//	default:
-	//	os << m_rank;
+		//	default:
+		//	os << m_rank;
 	}
 	switch (color) {
 	case 1:
